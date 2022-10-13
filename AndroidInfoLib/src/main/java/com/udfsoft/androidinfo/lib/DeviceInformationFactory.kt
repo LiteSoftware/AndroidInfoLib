@@ -1,8 +1,10 @@
 package com.udfsoft.androidinfo.lib
 
 import android.os.Build
+import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.entity.*
 
+@WorkerThread
 object DeviceInformationFactory : DeviceInformation {
 
     override fun getGeneralInformation() = GeneralInformation(Build.BRAND, Build.MODEL)

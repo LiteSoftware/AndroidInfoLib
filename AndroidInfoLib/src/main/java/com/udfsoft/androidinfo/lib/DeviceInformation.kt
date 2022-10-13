@@ -1,12 +1,14 @@
 package com.udfsoft.androidinfo.lib
 
+import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.entity.*
 
+@WorkerThread
 interface DeviceInformation {
 
     fun getGeneralInformation(): GeneralInformation
 
-    fun getDesignInformation() : DesignInformation
+    fun getDesignInformation(): DesignInformation
 
     fun getSIMCardInformation(): SIMCardInformation
 
