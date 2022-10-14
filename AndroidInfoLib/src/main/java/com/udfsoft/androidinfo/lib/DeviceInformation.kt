@@ -1,5 +1,6 @@
 package com.udfsoft.androidinfo.lib
 
+import android.content.Context
 import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.entity.*
 
@@ -22,7 +23,7 @@ interface DeviceInformation {
 
     fun getGPUInformation(): GPUInformation
 
-    fun getRAMInformation(): RAMInformation
+    fun getRAMInformation(context: Context): RAMInformation
 
     fun getStorageInformation(): StorageInformation
 

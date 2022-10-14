@@ -14,16 +14,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initLiveData()
-        viewModel.loadInformation()
+        viewModel.loadInformation(requireContext())
     }
 
     private fun initLiveData() {
         viewModel.getGeneralInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, "GeneralInformation: $it")
+            Log.d(TAG, it.toString())
+        }
+        viewModel.getRAMInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
         }
 
         viewModel.getOSInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, "OSInformation: $it")
+            Log.d(TAG, it.toString())
         }
     }
 

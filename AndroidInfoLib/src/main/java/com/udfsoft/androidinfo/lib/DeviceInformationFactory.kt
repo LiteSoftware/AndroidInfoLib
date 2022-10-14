@@ -1,9 +1,12 @@
 package com.udfsoft.androidinfo.lib
 
+import android.content.Context
 import android.os.Build
 import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.command.GetOSInformationCommand
+import com.udfsoft.androidinfo.lib.command.GetRAMInformationCommand
 import com.udfsoft.androidinfo.lib.entity.*
+
 
 @WorkerThread
 object DeviceInformationFactory : DeviceInformation {
@@ -41,8 +44,9 @@ object DeviceInformationFactory : DeviceInformation {
         TODO("Not yet implemented")
     }
 
-    override fun getRAMInformation(): RAMInformation {
-        TODO("Not yet implemented")
+    override fun getRAMInformation(context: Context): RAMInformation {
+        val getRAMInformationCommand = GetRAMInformationCommand(context)
+        return getRAMInformationCommand(Unit)
     }
 
     override fun getStorageInformation(): StorageInformation {

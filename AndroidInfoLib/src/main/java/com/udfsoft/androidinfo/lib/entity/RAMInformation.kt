@@ -1,5 +1,7 @@
 package com.udfsoft.androidinfo.lib.entity
 
-class RAMInformation {
-
-}
+data class RAMInformation(
+    val totalMem: Long,
+    val availMem: Long,
+    val usedMemory: Long
+)
