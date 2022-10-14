@@ -2,10 +2,13 @@ package com.udfsoft.androidinfo.lib
 
 import android.os.Build
 import androidx.annotation.WorkerThread
+import com.udfsoft.androidinfo.lib.command.GetOSInformationCommand
 import com.udfsoft.androidinfo.lib.entity.*
 
 @WorkerThread
 object DeviceInformationFactory : DeviceInformation {
+
+    private const val LOG_TAG = "DeviceInformation"
 
     override fun getGeneralInformation() = GeneralInformation(Build.BRAND, Build.MODEL)
 
@@ -26,7 +29,8 @@ object DeviceInformationFactory : DeviceInformation {
     }
 
     override fun getOSInformation(): OSInformation {
-        TODO("Not yet implemented")
+        val getOSInformationCommand = GetOSInformationCommand()
+        return getOSInformationCommand(Unit)
     }
 
     override fun getCPUInformation(): CPUInformation {
