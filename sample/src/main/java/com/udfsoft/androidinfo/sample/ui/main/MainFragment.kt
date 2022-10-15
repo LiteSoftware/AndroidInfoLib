@@ -21,6 +21,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getGeneralInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, "GeneralInformation: $it")
         }
+
+        viewModel.getOSInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, "OSInformation: $it")
+        }
     }
 
     companion object {
