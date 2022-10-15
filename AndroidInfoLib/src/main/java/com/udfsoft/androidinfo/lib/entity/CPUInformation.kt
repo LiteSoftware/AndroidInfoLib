@@ -1,5 +1,6 @@
 package com.udfsoft.androidinfo.lib.entity
 
-class CPUInformation {
-
-}
+data class CPUInformation(
+    val type: String,
+    val cores: List<CPUCore>
+)

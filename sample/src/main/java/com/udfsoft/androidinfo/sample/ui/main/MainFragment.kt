@@ -28,6 +28,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getOSInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+        viewModel.getCPUInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
     }
 
     companion object {

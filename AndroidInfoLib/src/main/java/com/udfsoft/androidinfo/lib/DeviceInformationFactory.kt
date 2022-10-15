@@ -5,8 +5,8 @@ import android.os.Build
 import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.command.GetOSInformationCommand
 import com.udfsoft.androidinfo.lib.command.GetRAMInformationCommand
+import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
 import com.udfsoft.androidinfo.lib.entity.*
-
 
 @WorkerThread
 object DeviceInformationFactory : DeviceInformation {
@@ -37,7 +37,8 @@ object DeviceInformationFactory : DeviceInformation {
     }
 
     override fun getCPUInformation(): CPUInformation {
-        TODO("Not yet implemented")
+        val getCpuInformationCommand = GetCpuInformationCommand()
+        return getCpuInformationCommand(Unit)
     }
 
     override fun getGPUInformation(): GPUInformation {
