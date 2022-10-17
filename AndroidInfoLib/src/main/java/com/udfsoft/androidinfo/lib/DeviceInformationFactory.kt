@@ -1,11 +1,14 @@
 package com.udfsoft.androidinfo.lib
 
+import android.Manifest
 import android.content.Context
 import android.os.Build
+import androidx.annotation.RequiresPermission
 import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.command.GetOSInformationCommand
 import com.udfsoft.androidinfo.lib.command.GetRAMInformationCommand
 import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
+import com.udfsoft.androidinfo.lib.command.sim.GetSIMCardInformationCommand
 import com.udfsoft.androidinfo.lib.entity.*
 
 @WorkerThread
@@ -19,8 +22,16 @@ object DeviceInformationFactory : DeviceInformation {
         TODO("Not yet implemented")
     }
 
-    override fun getSIMCardInformation(): SIMCardInformation {
-        TODO("Not yet implemented")
+    @RequiresPermission(
+        allOf = [
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_SMS,
+            "android.permission.READ_PHONE_NUMBERS"
+        ]
+    )
+    override fun getSIMCardInformation(context: Context): SIMCardInformation {
+        val getSIMCardInformationCommand = GetSIMCardInformationCommand(context)
+        return getSIMCardInformationCommand(Unit)
     }
 
     override fun getNetworkInformation(): NetworkInformation {

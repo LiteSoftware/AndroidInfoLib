@@ -1,8 +1,13 @@
 package com.udfsoft.androidinfo.sample.ui.main
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.udfsoft.androidinfo.sample.R
@@ -11,16 +16,74 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel by viewModels<MainViewModel>()
 
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            val grantedPermissions = it.values.filter { isGranted -> isGranted }.size
+            val isGranted = grantedPermissions == 3
+            if (isGranted) {
+                loadInformation()
+            } else {
+                Toast.makeText(requireContext(), "Permissions denied!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    private fun loadInformation() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_SMS
+            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_PHONE_NUMBERS
+            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Toast.makeText(requireContext(), "Permissions denied!", Toast.LENGTH_SHORT).show()
+            launchRequestPermissions()
+            return
+        }
+        viewModel.loadInformation(requireActivity())
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initLiveData()
-        viewModel.loadInformation(requireContext())
+        requestPermissions()
     }
+
+    private fun requestPermissions() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(), Manifest.permission.READ_PHONE_STATE
+            ) && ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(), Manifest.permission.READ_SMS
+            ) && ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(), "android.permission.READ_PHONE_NUMBERS"
+            )
+        ) {
+            launchRequestPermissions()
+        } else {
+            launchRequestPermissions()
+        }
+    }
+
+    private fun launchRequestPermissions() {
+        requestPermissionLauncher.launch(
+            arrayOf(
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_SMS,
+                "android.permission.READ_PHONE_NUMBERS"
+            )
+        )
+    }
+
 
     private fun initLiveData() {
         viewModel.getGeneralInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+
         viewModel.getRAMInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
@@ -28,7 +91,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getOSInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+
         viewModel.getCPUInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
+
+        viewModel.getSIMCardInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
     }
