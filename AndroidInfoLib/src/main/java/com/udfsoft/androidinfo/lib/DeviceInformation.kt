@@ -1,6 +1,8 @@
 package com.udfsoft.androidinfo.lib
 
+import android.Manifest
 import android.content.Context
+import androidx.annotation.RequiresPermission
 import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.entity.*
 
@@ -11,7 +13,14 @@ interface DeviceInformation {
 
     fun getDesignInformation(): DesignInformation
 
-    fun getSIMCardInformation(): SIMCardInformation
+    @RequiresPermission(
+        allOf = [
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.READ_SMS,
+            "android.permission.READ_PHONE_NUMBERS"
+        ]
+    )
+    fun getSIMCardInformation(context: Context): SIMCardInformation
 
     fun getNetworkInformation(): NetworkInformation
 
