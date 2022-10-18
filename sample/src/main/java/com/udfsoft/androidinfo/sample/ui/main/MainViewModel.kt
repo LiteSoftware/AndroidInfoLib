@@ -24,6 +24,8 @@ class MainViewModel : ViewModel() {
 
     private val simCardInformationLiveData = MutableLiveData<SIMCardInformation>()
 
+    private val displayInformationLiveData = MutableLiveData<DisplayInformation>()
+
     @RequiresPermission(
         allOf = [Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, "android.permission.READ_PHONE_NUMBERS"]
     )
@@ -33,6 +35,7 @@ class MainViewModel : ViewModel() {
         osInformationLiveData.postValue(DeviceInformationFactory.getOSInformation())
         cpuInformationLiveData.postValue(DeviceInformationFactory.getCPUInformation())
         simCardInformationLiveData.postValue(DeviceInformationFactory.getSIMCardInformation(context))
+        displayInformationLiveData.postValue(DeviceInformationFactory.getDisplayInformation(context))
     }
 
     fun getGeneralInformationLiveData() = generalInformationLiveData.toLiveData()
@@ -44,4 +47,6 @@ class MainViewModel : ViewModel() {
     fun getCPUInformationLiveData() = cpuInformationLiveData.toLiveData()
 
     fun getSIMCardInformationLiveData() = simCardInformationLiveData.toLiveData()
+
+    fun getDisplayInformationLiveData() = displayInformationLiveData.toLiveData()
 }

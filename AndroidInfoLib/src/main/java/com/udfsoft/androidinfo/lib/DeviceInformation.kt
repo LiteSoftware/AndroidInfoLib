@@ -36,7 +36,7 @@ interface DeviceInformation {
 
     fun getStorageInformation(): StorageInformation
 
-    fun getDisplayInformation(): DisplayInformation
+    fun getDisplayInformation(context: Context): DisplayInformation
 
     fun getSensorsInformation(): SensorsInformation
 

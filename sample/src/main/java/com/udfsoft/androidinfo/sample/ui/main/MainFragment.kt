@@ -99,6 +99,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getSIMCardInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+
+        viewModel.getDisplayInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
     }
 
     companion object {
