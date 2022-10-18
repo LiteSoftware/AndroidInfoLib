@@ -1,0 +1,8 @@
+<resources>
+    <string name="network_type_wifi">Wi-Fi</string>
+    <string name="network_type_cellular">CELLULAR</string>
+    <string name="network_type_ethernet">ETHERNET</string>
+    <string name="network_type_bluetooth">BLUETOOTH</string>
+    <string name="network_type_unknown">UNKNOWN</string>
+    <string name="network_type_none">No network</string>
+</resources>

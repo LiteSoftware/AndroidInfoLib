@@ -24,7 +24,7 @@ interface DeviceInformation {
 
     fun getNetworkInformation(): NetworkInformation
 
-    fun getNetworkTechnologiesInformation(): NetworkTechnologiesInformation
+    fun getNetworkTechnologiesInformation(context: Context): NetworkTechnologiesInformation
 
     fun getOSInformation(): OSInformation
 

@@ -9,6 +9,7 @@ import com.udfsoft.androidinfo.lib.command.GetOSInformationCommand
 import com.udfsoft.androidinfo.lib.command.GetRAMInformationCommand
 import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
 import com.udfsoft.androidinfo.lib.command.display.GetDisplayInformationCommand
+import com.udfsoft.androidinfo.lib.command.network.GetNetworkTechnologiesInformationCommand
 import com.udfsoft.androidinfo.lib.command.sim.GetSIMCardInformationCommand
 import com.udfsoft.androidinfo.lib.entity.*
 
@@ -35,8 +36,12 @@ object DeviceInformationFactory : DeviceInformation {
         TODO("Not yet implemented")
     }
 
-    override fun getNetworkTechnologiesInformation(): NetworkTechnologiesInformation {
-        TODO("Not yet implemented")
+    @RequiresPermission(
+        allOf = [Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE]
+    )
+    override fun getNetworkTechnologiesInformation(context: Context): NetworkTechnologiesInformation {
+        val getNetworkTechnologiesInformation = GetNetworkTechnologiesInformationCommand(context)
+        return getNetworkTechnologiesInformation(Unit)
     }
 
     override fun getOSInformation(): OSInformation {
