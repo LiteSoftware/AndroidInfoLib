@@ -2,23 +2,27 @@ package com.udfsoft.androidinfo.lib
 
 import android.Manifest
 import android.content.Context
-import android.os.Build
 import androidx.annotation.RequiresPermission
 import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.command.GetOSInformationCommand
 import com.udfsoft.androidinfo.lib.command.GetRAMInformationCommand
 import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
 import com.udfsoft.androidinfo.lib.command.display.GetDisplayInformationCommand
+import com.udfsoft.androidinfo.lib.command.general.GetGeneralInformationCommand
 import com.udfsoft.androidinfo.lib.command.network.GetNetworkTechnologiesInformationCommand
 import com.udfsoft.androidinfo.lib.command.sim.GetSIMCardInformationCommand
+import com.udfsoft.androidinfo.lib.di.NetworkFactory
 import com.udfsoft.androidinfo.lib.entity.*
+import com.udfsoft.androidinfo.lib.network.AndroidInfoApi
 
 @WorkerThread
 object DeviceInformationFactory : DeviceInformation {
 
     private const val LOG_TAG = "DeviceInformation"
 
-    override fun getGeneralInformation() = GeneralInformation(Build.BRAND, Build.MODEL)
+    private val api by lazy { NetworkFactory.getAndroidInfoApi() }
+
+    override fun getGeneralInformation() = GetGeneralInformationCommand(api).invoke(Unit)
 
     override fun getDesignInformation(): DesignInformation {
         TODO("Not yet implemented")
