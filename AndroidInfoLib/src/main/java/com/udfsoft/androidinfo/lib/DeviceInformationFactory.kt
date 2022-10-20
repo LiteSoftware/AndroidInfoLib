@@ -7,13 +7,13 @@ import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.command.GetOSInformationCommand
 import com.udfsoft.androidinfo.lib.command.GetRAMInformationCommand
 import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
+import com.udfsoft.androidinfo.lib.command.design.GetNetworkDesignInformationCommand
 import com.udfsoft.androidinfo.lib.command.display.GetDisplayInformationCommand
 import com.udfsoft.androidinfo.lib.command.general.GetGeneralInformationCommand
 import com.udfsoft.androidinfo.lib.command.network.GetNetworkTechnologiesInformationCommand
 import com.udfsoft.androidinfo.lib.command.sim.GetSIMCardInformationCommand
 import com.udfsoft.androidinfo.lib.di.NetworkFactory
 import com.udfsoft.androidinfo.lib.entity.*
-import com.udfsoft.androidinfo.lib.network.AndroidInfoApi
 
 @WorkerThread
 object DeviceInformationFactory : DeviceInformation {
@@ -24,9 +24,7 @@ object DeviceInformationFactory : DeviceInformation {
 
     override fun getGeneralInformation() = GetGeneralInformationCommand(api).invoke(Unit)
 
-    override fun getDesignInformation(): DesignInformation {
-        TODO("Not yet implemented")
-    }
+    override fun getDesignInformation() = GetNetworkDesignInformationCommand(api).invoke(Unit)
 
     @RequiresPermission(
         allOf = [Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, "android.permission.READ_PHONE_NUMBERS"]

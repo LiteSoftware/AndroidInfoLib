@@ -107,6 +107,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getNetworkTechnologiesInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+
+        viewModel.getDesignInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
     }
 
     companion object {
