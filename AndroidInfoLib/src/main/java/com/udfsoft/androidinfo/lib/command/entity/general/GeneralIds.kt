@@ -1,4 +1,4 @@
-package com.udfsoft.androidinfo.lib.command.entity
+package com.udfsoft.androidinfo.lib.command.entity.general
 
 enum class GeneralIds(val id: Int) {
 

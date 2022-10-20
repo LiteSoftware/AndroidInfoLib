@@ -29,6 +29,8 @@ class MainViewModel : ViewModel() {
     private val networkTechnologiesInformationLiveData =
         MutableLiveData<NetworkTechnologiesInformation>()
 
+    private val designInformationLiveData = MutableLiveData<DesignInformation>()
+
     @RequiresPermission(
         allOf = [Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, "android.permission.READ_PHONE_NUMBERS"]
     )
@@ -44,7 +46,7 @@ class MainViewModel : ViewModel() {
                 context
             )
         )
-
+        designInformationLiveData.postValue(DeviceInformationFactory.getDesignInformation())
     }
 
     fun getGeneralInformationLiveData() = generalInformationLiveData.toLiveData()
@@ -61,4 +63,6 @@ class MainViewModel : ViewModel() {
 
     fun getNetworkTechnologiesInformationLiveData() =
         networkTechnologiesInformationLiveData.toLiveData()
+
+    fun getDesignInformationLiveData() = designInformationLiveData.toLiveData()
 }

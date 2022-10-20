@@ -1,8 +1,8 @@
 package com.udfsoft.androidinfo.lib.command.general
 
 import com.udfsoft.androidinfo.lib.command.CommandInterface
-import com.udfsoft.androidinfo.lib.command.entity.GeneralIds
 import com.udfsoft.androidinfo.lib.command.entity.MenuIds
+import com.udfsoft.androidinfo.lib.command.entity.general.GeneralIds
 import com.udfsoft.androidinfo.lib.command.entity.general.NetworkGeneralInformation
 import com.udfsoft.androidinfo.lib.network.AndroidInfoApi
 
