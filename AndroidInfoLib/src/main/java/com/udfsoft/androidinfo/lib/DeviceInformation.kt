@@ -22,8 +22,6 @@ interface DeviceInformation {
     )
     fun getSIMCardInformation(context: Context): SIMCardInformation
 
-    fun getNetworkInformation(): NetworkInformation
-
     fun getNetworkTechnologiesInformation(context: Context): NetworkTechnologiesInformation
 
     fun getOSInformation(): OSInformation
