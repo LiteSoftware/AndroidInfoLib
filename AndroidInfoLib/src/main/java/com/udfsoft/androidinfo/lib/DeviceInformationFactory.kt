@@ -29,10 +29,8 @@ object DeviceInformationFactory : DeviceInformation {
     @RequiresPermission(
         allOf = [Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, "android.permission.READ_PHONE_NUMBERS"]
     )
-    override fun getSIMCardInformation(context: Context): SIMCardInformation {
-        val getSIMCardInformationCommand = GetSIMCardInformationCommand(context)
-        return getSIMCardInformationCommand(Unit)
-    }
+    override fun getSIMCardInformation(context: Context) =
+        GetSIMCardInformationCommand(context, api).invoke(Unit)
 
     override fun getNetworkInformation(): NetworkInformation {
         TODO("Not yet implemented")
