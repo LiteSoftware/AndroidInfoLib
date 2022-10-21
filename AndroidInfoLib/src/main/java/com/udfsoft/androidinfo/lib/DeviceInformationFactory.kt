@@ -39,10 +39,8 @@ object DeviceInformationFactory : DeviceInformation {
     @RequiresPermission(
         allOf = [Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE]
     )
-    override fun getNetworkTechnologiesInformation(context: Context): NetworkTechnologiesInformation {
-        val getNetworkTechnologiesInformation = GetNetworkTechnologiesInformationCommand(context)
-        return getNetworkTechnologiesInformation(Unit)
-    }
+    override fun getNetworkTechnologiesInformation(context: Context) =
+        GetNetworkTechnologiesInformationCommand(context, api).invoke(Unit)
 
     override fun getOSInformation(): OSInformation {
         val getOSInformationCommand = GetOSInformationCommand()
