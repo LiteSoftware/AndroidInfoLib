@@ -4,13 +4,13 @@ import android.Manifest
 import android.content.Context
 import androidx.annotation.RequiresPermission
 import androidx.annotation.WorkerThread
-import com.udfsoft.androidinfo.lib.command.GetOSInformationCommand
 import com.udfsoft.androidinfo.lib.command.GetRAMInformationCommand
 import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
 import com.udfsoft.androidinfo.lib.command.design.GetNetworkDesignInformationCommand
 import com.udfsoft.androidinfo.lib.command.display.GetDisplayInformationCommand
 import com.udfsoft.androidinfo.lib.command.general.GetGeneralInformationCommand
 import com.udfsoft.androidinfo.lib.command.network.GetNetworkTechnologiesInformationCommand
+import com.udfsoft.androidinfo.lib.command.os.GetOSInformationCommand
 import com.udfsoft.androidinfo.lib.command.sim.GetSIMCardInformationCommand
 import com.udfsoft.androidinfo.lib.di.NetworkFactory
 import com.udfsoft.androidinfo.lib.entity.*
@@ -32,18 +32,17 @@ object DeviceInformationFactory : DeviceInformation {
     override fun getSIMCardInformation(context: Context) =
         GetSIMCardInformationCommand(context, api).invoke(Unit)
 
-    override fun getNetworkInformation(): NetworkInformation {
-        TODO("Not yet implemented")
-    }
-
     @RequiresPermission(
         allOf = [Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE]
     )
     override fun getNetworkTechnologiesInformation(context: Context) =
         GetNetworkTechnologiesInformationCommand(context, api).invoke(Unit)
 
+    @RequiresPermission(
+        allOf = [Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE]
+    )
     override fun getOSInformation(): OSInformation {
-        val getOSInformationCommand = GetOSInformationCommand()
+        val getOSInformationCommand = GetOSInformationCommand(api)
         return getOSInformationCommand(Unit)
     }
 
