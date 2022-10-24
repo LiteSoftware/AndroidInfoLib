@@ -14,9 +14,17 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.sample.util
+package com.udfsoft.androidinfo.lib.command.storage
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.udfsoft.androidinfo.lib.command.BaseGetLocalInformationCommand
+import com.udfsoft.androidinfo.lib.command.entity.storage.MutableStorageInformation
+import com.udfsoft.androidinfo.lib.util.MemoryUtils
 
-fun <T> MutableLiveData<T>.toLiveData(): LiveData<T> = this
+class GetLocalStorageInformation : BaseGetLocalInformationCommand<MutableStorageInformation>() {
+
+    override fun invoke(param: MutableStorageInformation) {
+        param.totalInternalMemorySize = MemoryUtils.getTotalInternalMemorySize()
+        param.availableInternalMemorySize = MemoryUtils.getAvailableInternalMemorySize()
+    }
+
+}

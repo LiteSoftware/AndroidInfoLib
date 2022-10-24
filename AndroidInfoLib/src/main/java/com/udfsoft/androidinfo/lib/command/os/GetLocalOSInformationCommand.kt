@@ -11,14 +11,12 @@ class GetLocalOSInformationCommand : BaseGetLocalInformationCommand<MutableOSInf
     @RequiresPermission(
         allOf = [Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE]
     )
-    override fun invoke(param: MutableOSInformation): MutableOSInformation {
+    override fun invoke(param: MutableOSInformation) {
         param.manufacturer = Build.MANUFACTURER
         param.version = Build.VERSION.SDK_INT
         param.versionRelease = Build.VERSION.RELEASE
         param.incremental = Build.VERSION.INCREMENTAL
         param.codeName = Build.VERSION.CODENAME
         param.linuxVersion = System.getProperty("os.version")
-
-        return param
     }
 }

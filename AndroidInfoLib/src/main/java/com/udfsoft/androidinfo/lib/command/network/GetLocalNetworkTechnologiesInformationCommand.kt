@@ -14,11 +14,9 @@ class GetLocalNetworkTechnologiesInformationCommand(
     @RequiresPermission(
         allOf = [Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE]
     )
-    override fun invoke(param: MutableNetworkTechnologiesInformation): MutableNetworkTechnologiesInformation {
+    override fun invoke(param: MutableNetworkTechnologiesInformation) {
         param.networkType = NetworkUtils.getNetworkType(context)
         param.localIp = NetworkUtils.getLocalIpAddress()
         param.mac = NetworkUtils.getMACAddress(null)
-
-        return param
     }
 }
