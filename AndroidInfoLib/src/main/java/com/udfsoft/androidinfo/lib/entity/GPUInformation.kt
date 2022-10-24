@@ -1,5 +1,5 @@
 package com.udfsoft.androidinfo.lib.entity
 
-class GPUInformation {
-
-}
+data class GPUInformation(
+    val name: String?
+)

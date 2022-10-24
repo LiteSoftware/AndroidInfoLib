@@ -131,6 +131,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getStorageInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+
+        viewModel.getGPUInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
     }
 
     companion object {
