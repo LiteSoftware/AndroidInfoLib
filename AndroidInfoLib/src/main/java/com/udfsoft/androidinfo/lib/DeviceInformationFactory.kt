@@ -25,6 +25,7 @@ import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
 import com.udfsoft.androidinfo.lib.command.design.GetNetworkDesignInformationCommand
 import com.udfsoft.androidinfo.lib.command.display.GetDisplayInformationCommand
 import com.udfsoft.androidinfo.lib.command.general.GetGeneralInformationCommand
+import com.udfsoft.androidinfo.lib.command.gpu.GetGPUInformationCommand
 import com.udfsoft.androidinfo.lib.command.network.GetNetworkTechnologiesInformationCommand
 import com.udfsoft.androidinfo.lib.command.os.GetOSInformationCommand
 import com.udfsoft.androidinfo.lib.command.sim.GetSIMCardInformationCommand
@@ -68,9 +69,7 @@ object DeviceInformationFactory : DeviceInformation {
         return getCpuInformationCommand(Unit)
     }
 
-    override fun getGPUInformation(): GPUInformation {
-        TODO("Not yet implemented")
-    }
+    override fun getGPUInformation() = GetGPUInformationCommand(api).invoke(Unit)
 
     override fun getRAMInformation(context: Context): RAMInformation {
         val getRAMInformationCommand = GetRAMInformationCommand(context)
