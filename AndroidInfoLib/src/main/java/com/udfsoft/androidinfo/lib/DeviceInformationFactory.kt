@@ -28,6 +28,7 @@ import com.udfsoft.androidinfo.lib.command.general.GetGeneralInformationCommand
 import com.udfsoft.androidinfo.lib.command.gpu.GetGPUInformationCommand
 import com.udfsoft.androidinfo.lib.command.network.GetNetworkTechnologiesInformationCommand
 import com.udfsoft.androidinfo.lib.command.os.GetOSInformationCommand
+import com.udfsoft.androidinfo.lib.command.sensors.GetSensorsInformationCommand
 import com.udfsoft.androidinfo.lib.command.sim.GetSIMCardInformationCommand
 import com.udfsoft.androidinfo.lib.command.storage.GetStorageInformation
 import com.udfsoft.androidinfo.lib.di.NetworkFactory
@@ -81,9 +82,7 @@ object DeviceInformationFactory : DeviceInformation {
     override fun getDisplayInformation(context: Context) =
         GetDisplayInformationCommand(context, api).invoke(Unit)
 
-    override fun getSensorsInformation(): SensorsInformation {
-        TODO("Not yet implemented")
-    }
+    override fun getSensorsInformation() = GetSensorsInformationCommand(api).invoke(Unit)
 
     override fun getRearCameraInformation(): RearCameraInformation {
         TODO("Not yet implemented")

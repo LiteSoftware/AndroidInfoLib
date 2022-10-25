@@ -14,9 +14,8 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.lib.mapper
+package com.udfsoft.androidinfo.lib.command.entity.sensors
 
-interface MapperInterface<P, R> {
-
-    operator fun invoke(param: P): R
+enum class SensorsIds(val id: Int) {
+    Sensors(11450)
 }

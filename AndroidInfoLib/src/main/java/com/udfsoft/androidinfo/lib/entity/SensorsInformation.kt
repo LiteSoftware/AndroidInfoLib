@@ -1,5 +1,3 @@
 package com.udfsoft.androidinfo.lib.entity
 
-class SensorsInformation {
-
-}
+data class SensorsInformation(val declareSensorsList: String?)
