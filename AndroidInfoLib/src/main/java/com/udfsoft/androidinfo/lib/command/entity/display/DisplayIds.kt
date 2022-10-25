@@ -14,13 +14,17 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.lib.command.general
+package com.udfsoft.androidinfo.lib.command.entity.display
 
-import android.os.Build
-import com.udfsoft.androidinfo.lib.command.CommandInterface
-import com.udfsoft.androidinfo.lib.command.entity.general.LocalGeneralInformation
-
-class GetLocalGeneralInformationCommand : CommandInterface<Unit, LocalGeneralInformation> {
-
-    override fun invoke(param: Unit) = LocalGeneralInformation(Build.BRAND, Build.MODEL)
+enum class DisplayIds(val id: Int) {
+    TypeTechnology(10350),
+    DiagonalSize(10360),
+    Width(10370),
+    Height(10380),
+    AspectRatio(10390),
+    Resolution(10400),
+    PixelDensity(10410),
+    ColorDepth(10420),
+    DisplayArea(10430),
+    OtherFeatures(10440),
 }
