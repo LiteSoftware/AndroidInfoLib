@@ -79,7 +79,7 @@ object DeviceInformationFactory : DeviceInformation {
     override fun getStorageInformation() = GetStorageInformation(api).invoke(Unit)
 
     override fun getDisplayInformation(context: Context): DisplayInformation {
-        val getDisplayInformationCommand = GetDisplayInformationCommand(context)
+        val getDisplayInformationCommand = GetDisplayInformationCommand(context, api)
         return getDisplayInformationCommand(Unit)
     }
 
