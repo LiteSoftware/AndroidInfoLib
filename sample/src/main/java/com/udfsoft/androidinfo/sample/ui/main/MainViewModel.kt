@@ -53,6 +53,8 @@ class MainViewModel : ViewModel() {
 
     private val sensorsInformationLiveData = MutableLiveData<SensorsInformation>()
 
+    private val rearCameraInformationLiveData = MutableLiveData<RearCameraInformation>()
+
     @RequiresPermission(
         allOf = [Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, "android.permission.READ_PHONE_NUMBERS"]
     )
@@ -72,6 +74,7 @@ class MainViewModel : ViewModel() {
         storageInformationLiveData.postValue(DeviceInformationFactory.getStorageInformation())
         gpuInformationLiveData.postValue(DeviceInformationFactory.getGPUInformation())
         sensorsInformationLiveData.postValue(DeviceInformationFactory.getSensorsInformation())
+        rearCameraInformationLiveData.postValue(DeviceInformationFactory.getRearCameraInformation())
     }
 
     fun getGeneralInformationLiveData() = generalInformationLiveData.toLiveData()
@@ -96,4 +99,6 @@ class MainViewModel : ViewModel() {
     fun getGPUInformationLiveData() = gpuInformationLiveData.toLiveData()
 
     fun getSensorsInformationLiveData() = sensorsInformationLiveData.toLiveData()
+
+    fun getRearCameraInformationLiveData() = rearCameraInformationLiveData.toLiveData()
 }
