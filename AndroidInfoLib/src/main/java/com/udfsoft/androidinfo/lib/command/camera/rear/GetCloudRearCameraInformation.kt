@@ -18,8 +18,8 @@ package com.udfsoft.androidinfo.lib.command.camera.rear
 
 import com.udfsoft.androidinfo.lib.command.BaseGetCloudInformationCommand
 import com.udfsoft.androidinfo.lib.command.entity.MenuIds
-import com.udfsoft.androidinfo.lib.command.entity.camera.CameraIds
 import com.udfsoft.androidinfo.lib.command.entity.camera.MutableRearCameraInformation
+import com.udfsoft.androidinfo.lib.command.entity.camera.RearCameraIds
 import com.udfsoft.androidinfo.lib.network.AndroidInfoApi
 import com.udfsoft.androidinfo.lib.network.entity.DeviceInformationItemNetwork
 
@@ -31,16 +31,16 @@ class GetCloudRearCameraInformation(
         item: DeviceInformationItemNetwork, entity: MutableRearCameraInformation
     ) {
         when (item.id) {
-            CameraIds.SensorModel.id -> entity.sensorModel = item.value
-            CameraIds.SensorFormat.id -> entity.sensorFormat = item.value
-            CameraIds.PixelSize.id -> entity.pixelSize = item.value
-            CameraIds.Aperture.id -> entity.aperture = item.value
-            CameraIds.FocalLength.id -> entity.focalLength = item.value
-            CameraIds.FlashType.id -> entity.flashType = item.value
-            CameraIds.ImageResolution.id -> entity.imageResolution = item.value
-            CameraIds.VideoResolution.id -> entity.videoResolution = item.value
-            CameraIds.VideoFPS.id -> entity.videoFPS = item.value
-            CameraIds.Features.id -> entity.features = item.value
+            RearCameraIds.SensorModel.id -> entity.sensorModel = item.value
+            RearCameraIds.SensorFormat.id -> entity.sensorFormat = item.value
+            RearCameraIds.PixelSize.id -> entity.pixelSize = item.value
+            RearCameraIds.Aperture.id -> entity.aperture = item.value
+            RearCameraIds.FocalLength.id -> entity.focalLength = item.value
+            RearCameraIds.FlashType.id -> entity.flashType = item.value
+            RearCameraIds.ImageResolution.id -> entity.imageResolution = item.value
+            RearCameraIds.VideoResolution.id -> entity.videoResolution = item.value
+            RearCameraIds.VideoFPS.id -> entity.videoFPS = item.value
+            RearCameraIds.Features.id -> entity.features = item.value
         }
     }
 }

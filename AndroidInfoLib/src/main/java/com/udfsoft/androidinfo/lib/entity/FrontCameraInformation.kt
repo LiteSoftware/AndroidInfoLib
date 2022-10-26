@@ -1,5 +1,12 @@
 package com.udfsoft.androidinfo.lib.entity
 
-class FrontCameraInformation {
-
-}
+data class FrontCameraInformation(
+    val sensorModel: String?,
+    val sensorType: String?,
+    val aperture: String?,
+    val focalLength: String?,
+    val imageResolution: String?,
+    val videoResolution: String?,
+    val videoFPS: String?,
+    val features: String?
+)
