@@ -21,6 +21,7 @@ import android.content.Context
 import androidx.annotation.RequiresPermission
 import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.command.GetRAMInformationCommand
+import com.udfsoft.androidinfo.lib.command.camera.rear.GetRearCameraInformationCommand
 import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
 import com.udfsoft.androidinfo.lib.command.design.GetNetworkDesignInformationCommand
 import com.udfsoft.androidinfo.lib.command.display.GetDisplayInformationCommand
@@ -84,9 +85,7 @@ object DeviceInformationFactory : DeviceInformation {
 
     override fun getSensorsInformation() = GetSensorsInformationCommand(api).invoke(Unit)
 
-    override fun getRearCameraInformation(): RearCameraInformation {
-        TODO("Not yet implemented")
-    }
+    override fun getRearCameraInformation() = GetRearCameraInformationCommand(api).invoke(Unit)
 
     override fun getFrontCameraInformation(): FrontCameraInformation {
         TODO("Not yet implemented")

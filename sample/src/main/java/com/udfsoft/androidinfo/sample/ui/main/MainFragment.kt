@@ -139,6 +139,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getSensorsInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+
+        viewModel.getRearCameraInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
     }
 
     companion object {
