@@ -135,6 +135,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getGPUInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+
+        viewModel.getSensorsInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
     }
 
     companion object {

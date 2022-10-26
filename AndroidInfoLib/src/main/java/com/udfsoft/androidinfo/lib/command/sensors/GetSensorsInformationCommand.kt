@@ -14,9 +14,18 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.lib.mapper
+package com.udfsoft.androidinfo.lib.command.sensors
 
-interface MapperInterface<P, R> {
+import com.udfsoft.androidinfo.lib.command.CommandInterface
+import com.udfsoft.androidinfo.lib.command.entity.sensors.MutableSensorsInformation
+import com.udfsoft.androidinfo.lib.entity.SensorsInformation
+import com.udfsoft.androidinfo.lib.network.AndroidInfoApi
 
-    operator fun invoke(param: P): R
+class GetSensorsInformationCommand(
+    val api: AndroidInfoApi
+) : CommandInterface<Unit, SensorsInformation> {
+
+    override fun invoke(param: Unit) = MutableSensorsInformation().also {
+        GetCloudSensorsInformation(api).invoke(it)
+    }.build()
 }

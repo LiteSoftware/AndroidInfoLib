@@ -14,9 +14,14 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.lib.mapper
+package com.udfsoft.androidinfo.lib.command.entity.sensors
 
-interface MapperInterface<P, R> {
+import com.udfsoft.androidinfo.lib.command.entity.MutableEntity
+import com.udfsoft.androidinfo.lib.entity.SensorsInformation
 
-    operator fun invoke(param: P): R
+data class MutableSensorsInformation(
+    var declareSensorsList: String? = null
+) : MutableEntity<SensorsInformation> {
+
+    override fun build() = SensorsInformation(declareSensorsList)
 }
