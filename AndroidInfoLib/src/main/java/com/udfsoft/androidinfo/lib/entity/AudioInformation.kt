@@ -1,5 +1,6 @@
 package com.udfsoft.androidinfo.lib.entity
 
-class AudioInformation {
-
-}
+data class AudioInformation(
+    val speaker: String?,
+    val headphoneJack: String?
+)
