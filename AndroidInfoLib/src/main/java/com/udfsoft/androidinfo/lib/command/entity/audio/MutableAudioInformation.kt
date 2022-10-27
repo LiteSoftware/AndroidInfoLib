@@ -14,15 +14,15 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.lib.command.entity.camera
+package com.udfsoft.androidinfo.lib.command.entity.audio
 
-enum class FrontCameraIds(val id: Int) {
-    SensorModel(13600),
-    SensorType(13610),
-    Aperture(13620),
-    FocalLength(13630),
-    ImageResolution(13640),
-    VideoResolution(13650),
-    VideoFPS(13660),
-    Features(13670)
+import com.udfsoft.androidinfo.lib.command.entity.MutableEntity
+import com.udfsoft.androidinfo.lib.entity.AudioInformation
+
+data class MutableAudioInformation(
+    var speaker: String? = null,
+    var headphoneJack: String? = null
+) : MutableEntity<AudioInformation> {
+
+    override fun build() = AudioInformation(speaker, headphoneJack)
 }

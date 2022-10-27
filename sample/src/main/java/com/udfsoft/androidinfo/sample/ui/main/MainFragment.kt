@@ -147,6 +147,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getFrontCameraInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+
+        viewModel.getAudioInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
     }
 
     companion object {

@@ -57,6 +57,8 @@ class MainViewModel : ViewModel() {
 
     private val frontCameraInformationLiveData = MutableLiveData<FrontCameraInformation>()
 
+    private val audioInformationLiveData = MutableLiveData<AudioInformation>()
+
     @RequiresPermission(
         allOf = [Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, "android.permission.READ_PHONE_NUMBERS"]
     )
@@ -78,6 +80,7 @@ class MainViewModel : ViewModel() {
         sensorsInformationLiveData.postValue(DeviceInformationFactory.getSensorsInformation())
         rearCameraInformationLiveData.postValue(DeviceInformationFactory.getRearCameraInformation())
         frontCameraInformationLiveData.postValue(DeviceInformationFactory.getFrontCameraInformation())
+        audioInformationLiveData.postValue(DeviceInformationFactory.getAudioInformation())
     }
 
     fun getGeneralInformationLiveData() = generalInformationLiveData.toLiveData()
@@ -106,4 +109,6 @@ class MainViewModel : ViewModel() {
     fun getRearCameraInformationLiveData() = rearCameraInformationLiveData.toLiveData()
 
     fun getFrontCameraInformationLiveData() = frontCameraInformationLiveData.toLiveData()
+
+    fun getAudioInformationLiveData() = audioInformationLiveData.toLiveData()
 }

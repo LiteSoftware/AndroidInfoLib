@@ -14,15 +14,18 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.lib.command.entity.camera
+package com.udfsoft.androidinfo.lib.command.audio
 
-enum class FrontCameraIds(val id: Int) {
-    SensorModel(13600),
-    SensorType(13610),
-    Aperture(13620),
-    FocalLength(13630),
-    ImageResolution(13640),
-    VideoResolution(13650),
-    VideoFPS(13660),
-    Features(13670)
+import com.udfsoft.androidinfo.lib.command.CommandInterface
+import com.udfsoft.androidinfo.lib.command.entity.audio.MutableAudioInformation
+import com.udfsoft.androidinfo.lib.entity.AudioInformation
+import com.udfsoft.androidinfo.lib.network.AndroidInfoApi
+
+class GetAudioInformationCommand(
+    private val api: AndroidInfoApi
+) : CommandInterface<Unit, AudioInformation> {
+
+    override fun invoke(param: Unit) = MutableAudioInformation().also {
+        GetCloudAudioInformationCommand(api).invoke(it)
+    }.build()
 }
