@@ -22,6 +22,7 @@ import androidx.annotation.RequiresPermission
 import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.command.GetRAMInformationCommand
 import com.udfsoft.androidinfo.lib.command.audio.GetAudioInformationCommand
+import com.udfsoft.androidinfo.lib.command.browser.GetBrowserInformationCommand
 import com.udfsoft.androidinfo.lib.command.camera.front.GetFrontCameraInformationCommand
 import com.udfsoft.androidinfo.lib.command.camera.rear.GetRearCameraInformationCommand
 import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
@@ -123,9 +124,7 @@ object DeviceInformationFactory : DeviceInformation {
         TODO("Not yet implemented")
     }
 
-    override fun getBrowserInformation(): BrowserInformation {
-        TODO("Not yet implemented")
-    }
+    override fun getBrowserInformation() = GetBrowserInformationCommand(api).invoke(Unit)
 
     override fun getAudioCodecsInformation(): AudioCodecsInformation {
         TODO("Not yet implemented")

@@ -159,6 +159,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getUSBInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+
+        viewModel.getBrowserInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
     }
 
     companion object {
