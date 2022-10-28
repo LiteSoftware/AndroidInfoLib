@@ -60,6 +60,8 @@ interface DeviceInformation {
 
     fun getAudioInformation(): AudioInformation
 
+    fun getWirelessInformation(): WirelessInformation
+
     fun getRadioInformation(): RadioInformation
 
     fun getTrackingInformation(): TrackingInformation

@@ -34,6 +34,8 @@ import com.udfsoft.androidinfo.lib.command.os.GetOSInformationCommand
 import com.udfsoft.androidinfo.lib.command.sensors.GetSensorsInformationCommand
 import com.udfsoft.androidinfo.lib.command.sim.GetSIMCardInformationCommand
 import com.udfsoft.androidinfo.lib.command.storage.GetStorageInformation
+import com.udfsoft.androidinfo.lib.command.usb.GetUSBInformationCommand
+import com.udfsoft.androidinfo.lib.command.wireless.GetWirelessInformationCommand
 import com.udfsoft.androidinfo.lib.di.NetworkFactory
 import com.udfsoft.androidinfo.lib.entity.*
 
@@ -93,6 +95,8 @@ object DeviceInformationFactory : DeviceInformation {
 
     override fun getAudioInformation() = GetAudioInformationCommand(api).invoke(Unit)
 
+    override fun getWirelessInformation() = GetWirelessInformationCommand(api).invoke(Unit)
+
     override fun getRadioInformation(): RadioInformation {
         TODO("Not yet implemented")
     }
@@ -109,9 +113,7 @@ object DeviceInformationFactory : DeviceInformation {
         TODO("Not yet implemented")
     }
 
-    override fun getUSBInformation(): USBInformation {
-        TODO("Not yet implemented")
-    }
+    override fun getUSBInformation() = GetUSBInformationCommand(api).invoke(Unit)
 
     override fun getHeadphoneJackInformation(): HeadphoneJackInformation {
         TODO("Not yet implemented")

@@ -151,6 +151,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getAudioInformationLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
         }
+
+        viewModel.getWirelessInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
+
+        viewModel.getUSBInformationLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, it.toString())
+        }
     }
 
     companion object {
