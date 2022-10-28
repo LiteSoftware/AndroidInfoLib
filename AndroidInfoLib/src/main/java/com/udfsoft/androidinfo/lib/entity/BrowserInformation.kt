@@ -1,5 +1,5 @@
 package com.udfsoft.androidinfo.lib.entity
 
-class BrowserInformation {
-
-}
+data class BrowserInformation(
+    val browserFeatures: String?
+)

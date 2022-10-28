@@ -63,6 +63,8 @@ class MainViewModel : ViewModel() {
 
     private val usbInformationLiveData = MutableLiveData<USBInformation>()
 
+    private val browserInformationLiveData = MutableLiveData<BrowserInformation>()
+
     @RequiresPermission(
         allOf = [Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, "android.permission.READ_PHONE_NUMBERS"]
     )
@@ -87,6 +89,7 @@ class MainViewModel : ViewModel() {
         audioInformationLiveData.postValue(DeviceInformationFactory.getAudioInformation())
         wirelessInformationLiveData.postValue(DeviceInformationFactory.getWirelessInformation())
         usbInformationLiveData.postValue(DeviceInformationFactory.getUSBInformation())
+        browserInformationLiveData.postValue(DeviceInformationFactory.getBrowserInformation())
     }
 
     fun getGeneralInformationLiveData() = generalInformationLiveData.toLiveData()
@@ -121,4 +124,6 @@ class MainViewModel : ViewModel() {
     fun getWirelessInformationLiveData() = wirelessInformationLiveData.toLiveData()
 
     fun getUSBInformationLiveData() = usbInformationLiveData.toLiveData()
+
+    fun getBrowserInformationLiveData() = browserInformationLiveData.toLiveData()
 }
