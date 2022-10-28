@@ -22,9 +22,11 @@ import androidx.annotation.RequiresPermission
 import androidx.annotation.WorkerThread
 import com.udfsoft.androidinfo.lib.command.GetRAMInformationCommand
 import com.udfsoft.androidinfo.lib.command.audio.GetAudioInformationCommand
+import com.udfsoft.androidinfo.lib.command.battery.GetBatteryInformationCommand
 import com.udfsoft.androidinfo.lib.command.browser.GetBrowserInformationCommand
 import com.udfsoft.androidinfo.lib.command.camera.front.GetFrontCameraInformationCommand
 import com.udfsoft.androidinfo.lib.command.camera.rear.GetRearCameraInformationCommand
+import com.udfsoft.androidinfo.lib.command.codecs.GetCodecsInformationCommand
 import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
 import com.udfsoft.androidinfo.lib.command.design.GetNetworkDesignInformationCommand
 import com.udfsoft.androidinfo.lib.command.display.GetDisplayInformationCommand
@@ -32,13 +34,16 @@ import com.udfsoft.androidinfo.lib.command.general.GetGeneralInformationCommand
 import com.udfsoft.androidinfo.lib.command.gpu.GetGPUInformationCommand
 import com.udfsoft.androidinfo.lib.command.network.GetNetworkTechnologiesInformationCommand
 import com.udfsoft.androidinfo.lib.command.os.GetOSInformationCommand
+import com.udfsoft.androidinfo.lib.command.sar.GetSARInformationCommand
 import com.udfsoft.androidinfo.lib.command.sensors.GetSensorsInformationCommand
 import com.udfsoft.androidinfo.lib.command.sim.GetSIMCardInformationCommand
 import com.udfsoft.androidinfo.lib.command.storage.GetStorageInformation
 import com.udfsoft.androidinfo.lib.command.usb.GetUSBInformationCommand
 import com.udfsoft.androidinfo.lib.command.wireless.GetWirelessInformationCommand
 import com.udfsoft.androidinfo.lib.di.NetworkFactory
-import com.udfsoft.androidinfo.lib.entity.*
+import com.udfsoft.androidinfo.lib.entity.CPUInformation
+import com.udfsoft.androidinfo.lib.entity.OSInformation
+import com.udfsoft.androidinfo.lib.entity.RAMInformation
 
 @WorkerThread
 object DeviceInformationFactory : DeviceInformation {
@@ -98,47 +103,13 @@ object DeviceInformationFactory : DeviceInformation {
 
     override fun getWirelessInformation() = GetWirelessInformationCommand(api).invoke(Unit)
 
-    override fun getRadioInformation(): RadioInformation {
-        TODO("Not yet implemented")
-    }
-
-    override fun getTrackingInformation(): TrackingInformation {
-        TODO("Not yet implemented")
-    }
-
-    override fun getWIFIInformation(): WIFIInformation {
-        TODO("Not yet implemented")
-    }
-
-    override fun getBluetoothInformation(): BluetoothInformation {
-        TODO("Not yet implemented")
-    }
-
     override fun getUSBInformation() = GetUSBInformationCommand(api).invoke(Unit)
-
-    override fun getHeadphoneJackInformation(): HeadphoneJackInformation {
-        TODO("Not yet implemented")
-    }
-
-    override fun getConnectivityInformation(): ConnectivityInformation {
-        TODO("Not yet implemented")
-    }
 
     override fun getBrowserInformation() = GetBrowserInformationCommand(api).invoke(Unit)
 
-    override fun getAudioCodecsInformation(): AudioCodecsInformation {
-        TODO("Not yet implemented")
-    }
+    override fun getCodecsInformation() = GetCodecsInformationCommand(api).invoke(Unit)
 
-    override fun getVideoCodecsInformation(): VideoCodecsInformation {
-        TODO("Not yet implemented")
-    }
+    override fun getBatteryInformation() = GetBatteryInformationCommand(api).invoke(Unit)
 
-    override fun getBatteryInformation(): BatteryInformation {
-        TODO("Not yet implemented")
-    }
-
-    override fun getAdditionalFeaturesInformation(): AdditionalFeaturesInformation {
-        TODO("Not yet implemented")
-    }
+    override fun getSARInformation() = GetSARInformationCommand(api).invoke(Unit)
 }
