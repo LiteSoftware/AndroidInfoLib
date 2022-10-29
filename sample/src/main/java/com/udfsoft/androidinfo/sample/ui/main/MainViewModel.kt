@@ -65,6 +65,12 @@ class MainViewModel : ViewModel() {
 
     private val browserInformationLiveData = MutableLiveData<BrowserInformation>()
 
+    private val codecsInformationLiveData = MutableLiveData<CodecsInformation>()
+
+    private val batteryInformationLiveData = MutableLiveData<BatteryInformation>()
+
+    private val sarInformationLiveData = MutableLiveData<SARInformation>()
+
     @RequiresPermission(
         allOf = [Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, "android.permission.READ_PHONE_NUMBERS"]
     )
@@ -90,6 +96,9 @@ class MainViewModel : ViewModel() {
         wirelessInformationLiveData.postValue(DeviceInformationFactory.getWirelessInformation())
         usbInformationLiveData.postValue(DeviceInformationFactory.getUSBInformation())
         browserInformationLiveData.postValue(DeviceInformationFactory.getBrowserInformation())
+        codecsInformationLiveData.postValue(DeviceInformationFactory.getCodecsInformation())
+        batteryInformationLiveData.postValue(DeviceInformationFactory.getBatteryInformation())
+        sarInformationLiveData.postValue(DeviceInformationFactory.getSARInformation())
     }
 
     fun getGeneralInformationLiveData() = generalInformationLiveData.toLiveData()
@@ -126,4 +135,10 @@ class MainViewModel : ViewModel() {
     fun getUSBInformationLiveData() = usbInformationLiveData.toLiveData()
 
     fun getBrowserInformationLiveData() = browserInformationLiveData.toLiveData()
+
+    fun getCodecsInformationLiveData() = codecsInformationLiveData.toLiveData()
+
+    fun getBatteryInformationLiveData() = batteryInformationLiveData.toLiveData()
+
+    fun getSARInformationLiveData() = sarInformationLiveData.toLiveData()
 }

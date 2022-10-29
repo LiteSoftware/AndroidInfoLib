@@ -62,27 +62,13 @@ interface DeviceInformation {
 
     fun getWirelessInformation(): WirelessInformation
 
-    fun getRadioInformation(): RadioInformation
-
-    fun getTrackingInformation(): TrackingInformation
-
-    fun getWIFIInformation(): WIFIInformation
-
-    fun getBluetoothInformation(): BluetoothInformation
-
     fun getUSBInformation(): USBInformation
-
-    fun getHeadphoneJackInformation(): HeadphoneJackInformation
-
-    fun getConnectivityInformation(): ConnectivityInformation
 
     fun getBrowserInformation(): BrowserInformation
 
-    fun getAudioCodecsInformation(): AudioCodecsInformation
-
-    fun getVideoCodecsInformation(): VideoCodecsInformation
+    fun getCodecsInformation(): CodecsInformation
 
     fun getBatteryInformation(): BatteryInformation
 
-    fun getAdditionalFeaturesInformation(): AdditionalFeaturesInformation
+    fun getSARInformation(): SARInformation
 }
