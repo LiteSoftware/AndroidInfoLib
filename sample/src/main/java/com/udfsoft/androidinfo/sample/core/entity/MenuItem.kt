@@ -14,11 +14,12 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.sample.util
+package com.udfsoft.androidinfo.sample.core.entity
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.annotation.DrawableRes
 
-fun <T> MutableLiveData<T>.toLiveData(): LiveData<T> = this
-
-fun <T> listLiveData() = MutableLiveData<List<T>>()
+data class MenuItem(
+    val id: Int,
+    val name: String,
+    @DrawableRes val logoId: Int
+)

@@ -17,6 +17,7 @@
 package com.udfsoft.androidinfo.lib
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.annotation.RequiresPermission
 import androidx.annotation.WorkerThread
@@ -30,6 +31,7 @@ import com.udfsoft.androidinfo.lib.command.codecs.GetCodecsInformationCommand
 import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
 import com.udfsoft.androidinfo.lib.command.design.GetNetworkDesignInformationCommand
 import com.udfsoft.androidinfo.lib.command.display.GetDisplayInformationCommand
+import com.udfsoft.androidinfo.lib.command.entity.MenuIds
 import com.udfsoft.androidinfo.lib.command.general.GetGeneralInformationCommand
 import com.udfsoft.androidinfo.lib.command.gpu.GetGPUInformationCommand
 import com.udfsoft.androidinfo.lib.command.network.GetNetworkTechnologiesInformationCommand
@@ -44,6 +46,7 @@ import com.udfsoft.androidinfo.lib.di.NetworkFactory
 import com.udfsoft.androidinfo.lib.entity.CPUInformation
 import com.udfsoft.androidinfo.lib.entity.OSInformation
 import com.udfsoft.androidinfo.lib.entity.RAMInformation
+import com.udfsoft.androidinfo.lib.util.asMap
 
 @WorkerThread
 object DeviceInformationFactory : DeviceInformation {
@@ -112,4 +115,43 @@ object DeviceInformationFactory : DeviceInformation {
     override fun getBatteryInformation() = GetBatteryInformationCommand(api).invoke(Unit)
 
     override fun getSARInformation() = GetSARInformationCommand(api).invoke(Unit)
+
+    @SuppressLint("MissingPermission")
+    override fun getInfoById(id: Int, context: Context?): Map<String, Any?> =
+        when (MenuIds.findMenuIdByIndex(id)) {
+            MenuIds.MENU_ID_GENERAL -> getGeneralInformation().asMap()
+            MenuIds.MENU_ID_DESIGN -> getDesignInformation().asMap()
+            MenuIds.MENU_ID_SIM -> context?.let { getSIMCardInformation(it).asMap() } ?: emptyMap()
+//            provideContextForBlock(context, ::getSIMCardInformation)
+            MenuIds.MENU_ID_MOBILE_NETWORK ->
+                context?.let { getNetworkTechnologiesInformation(it).asMap() } ?: emptyMap()
+            MenuIds.MENU_ID_OS -> getOSInformation().asMap()
+            MenuIds.MENU_ID_PROCESSOR -> getCPUInformation().asMap()
+            MenuIds.MENU_ID_GPU -> getGPUInformation().asMap()
+//            MenuIds.MENU_ID_MEMORY.ordinal,
+//            MenuIds.MENU_ID_STORAGE.ordinal,
+//            MenuIds.MENU_ID_DISPLAY(10000),
+//            MenuIds.MENU_ID_SENSORS(11000),
+//            MenuIds.MENU_ID_REAR_CAMERA(12000),
+//            MenuIds.MENU_ID_FRONT_CAMERA(13000),
+//            MenuIds.MENU_ID_AUDIO(14000),
+//            MenuIds.MENU_ID_WIRELESS(17000),
+//            MenuIds.MENU_ID_USB(19000),
+//            MenuIds.MENU_ID_BROWSER(22000),
+//            MenuIds.MENU_ID_CODECS(23000),
+//            MenuIds.MENU_ID_BATTERY(25000),
+//            MenuIds.MENU_ID_SAR(26000),
+            else -> throw UnsupportedOperationException()
+        }
+
+    @SuppressLint("MissingPermission")
+    private fun provideContextForBlock(
+        context: Context?,
+        runBlock: (Context) -> Any
+    ): Map<String, Any?> {
+        context?.let {
+            println("test: ${runBlock(it)}")
+            return runBlock(it).asMap()
+        } ?: throw RuntimeException()//?: emptyMap()
+    }
 }

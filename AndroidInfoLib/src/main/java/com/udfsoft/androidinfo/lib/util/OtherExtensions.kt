@@ -14,11 +14,11 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.sample.util
+package com.udfsoft.androidinfo.lib.util
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import kotlin.reflect.full.memberProperties
 
-fun <T> MutableLiveData<T>.toLiveData(): LiveData<T> = this
-
-fun <T> listLiveData() = MutableLiveData<List<T>>()
+inline fun <reified T : Any> T.asMap(): Map<String, Any?> {
+    val props = T::class.memberProperties.associateBy { it.name }
+    return props.keys.associateWith { props[it]?.get(this) }
+}

@@ -21,6 +21,9 @@ enum class MenuIds(val menuId: Int) {
     MENU_ID_BROWSER(22000),
     MENU_ID_CODECS(23000),
     MENU_ID_BATTERY(25000),
-    MENU_ID_SAR(26000),
-    MENU_ID_ADDITIONAL_FEATURES(27000)
+    MENU_ID_SAR(26000);
+
+    companion object {
+        fun findMenuIdByIndex(index: Int) = values().firstOrNull { it.ordinal == index }
+    }
 }

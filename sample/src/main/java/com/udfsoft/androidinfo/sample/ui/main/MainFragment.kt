@@ -16,165 +16,55 @@
 
 package com.udfsoft.androidinfo.sample.ui.main
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import com.udfsoft.androidinfo.sample.R
+import com.udfsoft.androidinfo.sample.core.entity.MenuItem
+import com.udfsoft.androidinfo.sample.databinding.FragmentMainBinding
+import com.udfsoft.androidinfo.sample.ui.adapter.MenuItemAdapter
+import com.udfsoft.androidinfo.sample.ui.details.DetailsFragment
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel by viewModels<MainViewModel>()
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-            val grantedPermissions = it.values.filter { isGranted -> isGranted }.size
-            val isGranted = grantedPermissions == 3
-            if (isGranted) {
-                loadInformation()
-            } else {
-                Toast.makeText(requireContext(), "Permissions denied!", Toast.LENGTH_SHORT).show()
-            }
-        }
+    private lateinit var binding: FragmentMainBinding
 
-    private fun loadInformation() {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_SMS
-            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_PHONE_NUMBERS
-            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_PHONE_STATE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Toast.makeText(requireContext(), "Permissions denied!", Toast.LENGTH_SHORT).show()
-            launchRequestPermissions()
-            return
-        }
-        viewModel.loadInformation(requireActivity())
-    }
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = FragmentMainBinding.inflate(inflater, container, false).also {
+        binding = it
+    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initLiveData()
-        requestPermissions()
+        viewModel.loadMenu()
     }
-
-    private fun requestPermissions() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(), Manifest.permission.READ_PHONE_STATE
-            ) && ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(), Manifest.permission.READ_SMS
-            ) && ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(), "android.permission.READ_PHONE_NUMBERS"
-            )
-        ) {
-            launchRequestPermissions()
-        } else {
-            launchRequestPermissions()
-        }
-    }
-
-    private fun launchRequestPermissions() {
-        requestPermissionLauncher.launch(
-            arrayOf(
-                Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.READ_SMS,
-                "android.permission.READ_PHONE_NUMBERS"
-            )
-        )
-    }
-
 
     private fun initLiveData() {
-        viewModel.getGeneralInformationLiveData().observe(viewLifecycleOwner) {
+        viewModel.getMenuLiveData().observe(viewLifecycleOwner) {
             Log.d(TAG, it.toString())
+            binding.menuRecyclerView.adapter = MenuItemAdapter(::onMenuItemClick).apply {
+                setItems(it)
+            }
         }
+    }
 
-        viewModel.getRAMInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getOSInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getCPUInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getSIMCardInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getDisplayInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getNetworkTechnologiesInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getDesignInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getStorageInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getGPUInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getSensorsInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getRearCameraInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getFrontCameraInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getAudioInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getWirelessInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getUSBInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getBrowserInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getCodecsInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getBatteryInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
-
-        viewModel.getSARInformationLiveData().observe(viewLifecycleOwner) {
-            Log.d(TAG, it.toString())
-        }
+    private fun onMenuItemClick(item: MenuItem) {
+        requireActivity().supportFragmentManager
+            .commit {
+                replace(R.id.container, DetailsFragment.newInstance(item.id))
+                addToBackStack(null)
+            }
     }
 
     companion object {
