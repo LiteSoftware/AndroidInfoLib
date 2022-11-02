@@ -14,22 +14,12 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.sample
+package com.udfsoft.androidinfo.sample.core.entity
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commitNow
-import com.udfsoft.androidinfo.sample.ui.main.MainFragment
+import androidx.annotation.DrawableRes
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        if (savedInstanceState == null) {
-            supportFragmentManager.commitNow {
-                replace(R.id.container, MainFragment.newInstance())
-            }
-        }
-    }
-}
+data class MenuItem(
+    val id: Int,
+    val name: String,
+    @DrawableRes val logoId: Int
+)

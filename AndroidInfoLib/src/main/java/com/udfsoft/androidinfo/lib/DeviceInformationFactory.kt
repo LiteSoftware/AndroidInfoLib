@@ -17,6 +17,7 @@
 package com.udfsoft.androidinfo.lib
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.annotation.RequiresPermission
 import androidx.annotation.WorkerThread
@@ -30,6 +31,7 @@ import com.udfsoft.androidinfo.lib.command.codecs.GetCodecsInformationCommand
 import com.udfsoft.androidinfo.lib.command.cpu.GetCpuInformationCommand
 import com.udfsoft.androidinfo.lib.command.design.GetNetworkDesignInformationCommand
 import com.udfsoft.androidinfo.lib.command.display.GetDisplayInformationCommand
+import com.udfsoft.androidinfo.lib.command.entity.MenuIds
 import com.udfsoft.androidinfo.lib.command.general.GetGeneralInformationCommand
 import com.udfsoft.androidinfo.lib.command.gpu.GetGPUInformationCommand
 import com.udfsoft.androidinfo.lib.command.network.GetNetworkTechnologiesInformationCommand
@@ -44,6 +46,7 @@ import com.udfsoft.androidinfo.lib.di.NetworkFactory
 import com.udfsoft.androidinfo.lib.entity.CPUInformation
 import com.udfsoft.androidinfo.lib.entity.OSInformation
 import com.udfsoft.androidinfo.lib.entity.RAMInformation
+import com.udfsoft.androidinfo.lib.util.asMap
 
 @WorkerThread
 object DeviceInformationFactory : DeviceInformation {
@@ -112,4 +115,30 @@ object DeviceInformationFactory : DeviceInformation {
     override fun getBatteryInformation() = GetBatteryInformationCommand(api).invoke(Unit)
 
     override fun getSARInformation() = GetSARInformationCommand(api).invoke(Unit)
+
+    @SuppressLint("MissingPermission")
+    override fun getInfoById(id: Int, context: Context): Map<String, Any?> =
+        when (MenuIds.findMenuIdByIndex(id)) {
+            MenuIds.MENU_ID_GENERAL -> getGeneralInformation().asMap()
+            MenuIds.MENU_ID_DESIGN -> getDesignInformation().asMap()
+            MenuIds.MENU_ID_SIM -> getSIMCardInformation(context).asMap()
+            MenuIds.MENU_ID_MOBILE_NETWORK -> getNetworkTechnologiesInformation(context).asMap()
+            MenuIds.MENU_ID_OS -> getOSInformation().asMap()
+            MenuIds.MENU_ID_PROCESSOR -> getCPUInformation().asMap()
+            MenuIds.MENU_ID_GPU -> getGPUInformation().asMap()
+            MenuIds.MENU_ID_MEMORY -> getRAMInformation(context).asMap()
+            MenuIds.MENU_ID_STORAGE -> getStorageInformation().asMap()
+            MenuIds.MENU_ID_DISPLAY -> getDisplayInformation(context).asMap()
+            MenuIds.MENU_ID_SENSORS -> getSensorsInformation().asMap()
+            MenuIds.MENU_ID_REAR_CAMERA -> getRearCameraInformation().asMap()
+            MenuIds.MENU_ID_FRONT_CAMERA -> getFrontCameraInformation().asMap()
+            MenuIds.MENU_ID_AUDIO -> getAudioInformation().asMap()
+            MenuIds.MENU_ID_WIRELESS -> getWirelessInformation().asMap()
+            MenuIds.MENU_ID_USB -> getUSBInformation().asMap()
+            MenuIds.MENU_ID_BROWSER -> getBrowserInformation().asMap()
+            MenuIds.MENU_ID_CODECS -> getCodecsInformation().asMap()
+            MenuIds.MENU_ID_BATTERY -> getBatteryInformation().asMap()
+            MenuIds.MENU_ID_SAR -> getSARInformation().asMap()
+            else -> throw UnsupportedOperationException()
+        }
 }

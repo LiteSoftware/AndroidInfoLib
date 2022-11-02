@@ -14,22 +14,11 @@
  *   limitations under the License.
  */
 
-package com.udfsoft.androidinfo.sample
+package com.udfsoft.androidinfo.lib.util
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commitNow
-import com.udfsoft.androidinfo.sample.ui.main.MainFragment
+import kotlin.reflect.full.memberProperties
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        if (savedInstanceState == null) {
-            supportFragmentManager.commitNow {
-                replace(R.id.container, MainFragment.newInstance())
-            }
-        }
-    }
+inline fun <reified T : Any> T.asMap(): Map<String, Any?> {
+    val props = T::class.memberProperties.associateBy { it.name }
+    return props.keys.associateWith { props[it]?.get(this) }
 }

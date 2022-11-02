@@ -1,6 +1,6 @@
 package com.udfsoft.androidinfo.lib.network.interceptor
 
-import android.content.Context
+import android.os.Build
 import com.udfsoft.androidinfo.lib.BuildConfig
 import com.udfsoft.androidinfo.lib.network.Headers.ACCEPT
 import com.udfsoft.androidinfo.lib.network.Headers.ACCEPT_LANGUAGE
@@ -25,8 +25,8 @@ class StaticHeadersInterceptor : Interceptor {
             .addHeader(CONTENT_TYPE, APPLICATION_JSON_CONTENT_TYPE)
             .addHeader(USER_AGENT, userAgent)
             .addHeader(ACCEPT_LANGUAGE, Locale.getDefault().language)
-            .addHeader(DEVICE_BRAND_KEY, "xiaomi")//Build.BRAND)
-            .addHeader(DEVICE_MODEL_KEY, "redmi note 7") //Build.MODEL)
+            .addHeader(DEVICE_BRAND_KEY, Build.BRAND)
+            .addHeader(DEVICE_MODEL_KEY, Build.MODEL)
 
         return chain.proceed(requestBuilder.build())
     }

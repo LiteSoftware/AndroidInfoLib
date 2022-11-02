@@ -71,4 +71,6 @@ interface DeviceInformation {
     fun getBatteryInformation(): BatteryInformation
 
     fun getSARInformation(): SARInformation
+
+    fun getInfoById(id: Int, context: Context): Map<String, Any?>
 }

@@ -16,129 +16,22 @@
 
 package com.udfsoft.androidinfo.sample.ui.main
 
-import android.Manifest
-import android.content.Context
-import androidx.annotation.RequiresPermission
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.udfsoft.androidinfo.lib.DeviceInformationFactory
-import com.udfsoft.androidinfo.lib.entity.*
+import com.udfsoft.androidinfo.sample.core.entity.MenuItem
+import com.udfsoft.androidinfo.sample.core.entity.MenuItemEnum
+import com.udfsoft.androidinfo.sample.util.listLiveData
 import com.udfsoft.androidinfo.sample.util.toLiveData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
 
-    private val generalInformationLiveData = MutableLiveData<GeneralInformation>()
+    private val menuLiveData = listLiveData<MenuItem>()
 
-    private val ramInformationLiveData = MutableLiveData<RAMInformation>()
-
-    private val osInformationLiveData = MutableLiveData<OSInformation>()
-
-    private val cpuInformationLiveData = MutableLiveData<CPUInformation>()
-
-    private val simCardInformationLiveData = MutableLiveData<SIMCardInformation>()
-
-    private val displayInformationLiveData = MutableLiveData<DisplayInformation>()
-
-    private val networkTechnologiesInformationLiveData =
-        MutableLiveData<NetworkTechnologiesInformation>()
-
-    private val designInformationLiveData = MutableLiveData<DesignInformation>()
-
-    private val storageInformationLiveData = MutableLiveData<StorageInformation>()
-
-    private val gpuInformationLiveData = MutableLiveData<GPUInformation>()
-
-    private val sensorsInformationLiveData = MutableLiveData<SensorsInformation>()
-
-    private val rearCameraInformationLiveData = MutableLiveData<RearCameraInformation>()
-
-    private val frontCameraInformationLiveData = MutableLiveData<FrontCameraInformation>()
-
-    private val audioInformationLiveData = MutableLiveData<AudioInformation>()
-
-    private val wirelessInformationLiveData = MutableLiveData<WirelessInformation>()
-
-    private val usbInformationLiveData = MutableLiveData<USBInformation>()
-
-    private val browserInformationLiveData = MutableLiveData<BrowserInformation>()
-
-    private val codecsInformationLiveData = MutableLiveData<CodecsInformation>()
-
-    private val batteryInformationLiveData = MutableLiveData<BatteryInformation>()
-
-    private val sarInformationLiveData = MutableLiveData<SARInformation>()
-
-    @RequiresPermission(
-        allOf = [Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, "android.permission.READ_PHONE_NUMBERS"]
-    )
-    fun loadInformation(context: Context) = viewModelScope.launch(Dispatchers.IO) {
-        generalInformationLiveData.postValue(DeviceInformationFactory.getGeneralInformation())
-        ramInformationLiveData.postValue(DeviceInformationFactory.getRAMInformation(context))
-        osInformationLiveData.postValue(DeviceInformationFactory.getOSInformation())
-        cpuInformationLiveData.postValue(DeviceInformationFactory.getCPUInformation())
-        simCardInformationLiveData.postValue(DeviceInformationFactory.getSIMCardInformation(context))
-        displayInformationLiveData.postValue(DeviceInformationFactory.getDisplayInformation(context))
-        networkTechnologiesInformationLiveData.postValue(
-            DeviceInformationFactory.getNetworkTechnologiesInformation(
-                context
-            )
-        )
-        designInformationLiveData.postValue(DeviceInformationFactory.getDesignInformation())
-        storageInformationLiveData.postValue(DeviceInformationFactory.getStorageInformation())
-        gpuInformationLiveData.postValue(DeviceInformationFactory.getGPUInformation())
-        sensorsInformationLiveData.postValue(DeviceInformationFactory.getSensorsInformation())
-        rearCameraInformationLiveData.postValue(DeviceInformationFactory.getRearCameraInformation())
-        frontCameraInformationLiveData.postValue(DeviceInformationFactory.getFrontCameraInformation())
-        audioInformationLiveData.postValue(DeviceInformationFactory.getAudioInformation())
-        wirelessInformationLiveData.postValue(DeviceInformationFactory.getWirelessInformation())
-        usbInformationLiveData.postValue(DeviceInformationFactory.getUSBInformation())
-        browserInformationLiveData.postValue(DeviceInformationFactory.getBrowserInformation())
-        codecsInformationLiveData.postValue(DeviceInformationFactory.getCodecsInformation())
-        batteryInformationLiveData.postValue(DeviceInformationFactory.getBatteryInformation())
-        sarInformationLiveData.postValue(DeviceInformationFactory.getSARInformation())
+    fun loadMenu() {
+        menuLiveData.value = MenuItemEnum.values()
+            .map {
+                MenuItem(it.ordinal, it.title, it.logoId)
+            }
     }
 
-    fun getGeneralInformationLiveData() = generalInformationLiveData.toLiveData()
-
-    fun getRAMInformationLiveData() = ramInformationLiveData.toLiveData()
-
-    fun getOSInformationLiveData() = osInformationLiveData.toLiveData()
-
-    fun getCPUInformationLiveData() = cpuInformationLiveData.toLiveData()
-
-    fun getSIMCardInformationLiveData() = simCardInformationLiveData.toLiveData()
-
-    fun getDisplayInformationLiveData() = displayInformationLiveData.toLiveData()
-
-    fun getNetworkTechnologiesInformationLiveData() =
-        networkTechnologiesInformationLiveData.toLiveData()
-
-    fun getDesignInformationLiveData() = designInformationLiveData.toLiveData()
-
-    fun getStorageInformationLiveData() = storageInformationLiveData.toLiveData()
-
-    fun getGPUInformationLiveData() = gpuInformationLiveData.toLiveData()
-
-    fun getSensorsInformationLiveData() = sensorsInformationLiveData.toLiveData()
-
-    fun getRearCameraInformationLiveData() = rearCameraInformationLiveData.toLiveData()
-
-    fun getFrontCameraInformationLiveData() = frontCameraInformationLiveData.toLiveData()
-
-    fun getAudioInformationLiveData() = audioInformationLiveData.toLiveData()
-
-    fun getWirelessInformationLiveData() = wirelessInformationLiveData.toLiveData()
-
-    fun getUSBInformationLiveData() = usbInformationLiveData.toLiveData()
-
-    fun getBrowserInformationLiveData() = browserInformationLiveData.toLiveData()
-
-    fun getCodecsInformationLiveData() = codecsInformationLiveData.toLiveData()
-
-    fun getBatteryInformationLiveData() = batteryInformationLiveData.toLiveData()
-
-    fun getSARInformationLiveData() = sarInformationLiveData.toLiveData()
+    fun getMenuLiveData() = menuLiveData.toLiveData()
 }
