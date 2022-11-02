@@ -13,5 +13,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "AndroidInfoLib"
-include ':sample'
 include ':AndroidInfoLib'
+if (!System.env.JITPACK)
+    include ':sample'

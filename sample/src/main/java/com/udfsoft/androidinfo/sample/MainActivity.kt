@@ -18,6 +18,7 @@ package com.udfsoft.androidinfo.sample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commitNow
 import com.udfsoft.androidinfo.sample.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -26,9 +27,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
-                    .commitNow()
+            supportFragmentManager.commitNow {
+                replace(R.id.container, MainFragment.newInstance())
+            }
         }
     }
 }

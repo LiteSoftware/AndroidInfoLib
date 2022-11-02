@@ -45,5 +45,4 @@ class MapAdapter : RecyclerView.Adapter<MapViewHolder>() {
         items.putAll(map)
         notifyDataSetChanged()
     }
-
 }

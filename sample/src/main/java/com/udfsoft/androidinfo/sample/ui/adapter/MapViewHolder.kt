@@ -31,7 +31,8 @@ class MapViewHolder(
     private val valueTextView: TextView = ViewCompat.requireViewById(itemView, R.id.valueTextView)
 
     fun onBind(item: Pair<String, Any?>) {
-        nameTextView.text = item.first
+        val name = item.first.replaceFirstChar { it.uppercase() }
+        nameTextView.text = name
         valueTextView.text = item.second.toString()
     }
 }

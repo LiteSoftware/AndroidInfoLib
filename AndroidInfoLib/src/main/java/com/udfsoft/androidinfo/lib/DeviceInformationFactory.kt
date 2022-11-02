@@ -117,41 +117,28 @@ object DeviceInformationFactory : DeviceInformation {
     override fun getSARInformation() = GetSARInformationCommand(api).invoke(Unit)
 
     @SuppressLint("MissingPermission")
-    override fun getInfoById(id: Int, context: Context?): Map<String, Any?> =
+    override fun getInfoById(id: Int, context: Context): Map<String, Any?> =
         when (MenuIds.findMenuIdByIndex(id)) {
             MenuIds.MENU_ID_GENERAL -> getGeneralInformation().asMap()
             MenuIds.MENU_ID_DESIGN -> getDesignInformation().asMap()
-            MenuIds.MENU_ID_SIM -> context?.let { getSIMCardInformation(it).asMap() } ?: emptyMap()
-//            provideContextForBlock(context, ::getSIMCardInformation)
-            MenuIds.MENU_ID_MOBILE_NETWORK ->
-                context?.let { getNetworkTechnologiesInformation(it).asMap() } ?: emptyMap()
+            MenuIds.MENU_ID_SIM -> getSIMCardInformation(context).asMap()
+            MenuIds.MENU_ID_MOBILE_NETWORK -> getNetworkTechnologiesInformation(context).asMap()
             MenuIds.MENU_ID_OS -> getOSInformation().asMap()
             MenuIds.MENU_ID_PROCESSOR -> getCPUInformation().asMap()
             MenuIds.MENU_ID_GPU -> getGPUInformation().asMap()
-//            MenuIds.MENU_ID_MEMORY.ordinal,
-//            MenuIds.MENU_ID_STORAGE.ordinal,
-//            MenuIds.MENU_ID_DISPLAY(10000),
-//            MenuIds.MENU_ID_SENSORS(11000),
-//            MenuIds.MENU_ID_REAR_CAMERA(12000),
-//            MenuIds.MENU_ID_FRONT_CAMERA(13000),
-//            MenuIds.MENU_ID_AUDIO(14000),
-//            MenuIds.MENU_ID_WIRELESS(17000),
-//            MenuIds.MENU_ID_USB(19000),
-//            MenuIds.MENU_ID_BROWSER(22000),
-//            MenuIds.MENU_ID_CODECS(23000),
-//            MenuIds.MENU_ID_BATTERY(25000),
-//            MenuIds.MENU_ID_SAR(26000),
+            MenuIds.MENU_ID_MEMORY -> getRAMInformation(context).asMap()
+            MenuIds.MENU_ID_STORAGE -> getStorageInformation().asMap()
+            MenuIds.MENU_ID_DISPLAY -> getDisplayInformation(context).asMap()
+            MenuIds.MENU_ID_SENSORS -> getSensorsInformation().asMap()
+            MenuIds.MENU_ID_REAR_CAMERA -> getRearCameraInformation().asMap()
+            MenuIds.MENU_ID_FRONT_CAMERA -> getFrontCameraInformation().asMap()
+            MenuIds.MENU_ID_AUDIO -> getAudioInformation().asMap()
+            MenuIds.MENU_ID_WIRELESS -> getWirelessInformation().asMap()
+            MenuIds.MENU_ID_USB -> getUSBInformation().asMap()
+            MenuIds.MENU_ID_BROWSER -> getBrowserInformation().asMap()
+            MenuIds.MENU_ID_CODECS -> getCodecsInformation().asMap()
+            MenuIds.MENU_ID_BATTERY -> getBatteryInformation().asMap()
+            MenuIds.MENU_ID_SAR -> getSARInformation().asMap()
             else -> throw UnsupportedOperationException()
         }
-
-    @SuppressLint("MissingPermission")
-    private fun provideContextForBlock(
-        context: Context?,
-        runBlock: (Context) -> Any
-    ): Map<String, Any?> {
-        context?.let {
-            println("test: ${runBlock(it)}")
-            return runBlock(it).asMap()
-        } ?: throw RuntimeException()//?: emptyMap()
-    }
 }
