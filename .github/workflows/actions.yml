@@ -1,0 +1,51 @@
+name: 'Android application builder'
+
+on: push
+
+env:
+  ANDROID_API: 31
+
+jobs:
+
+  tests:
+    runs-on: ubuntu-latest
+    container:
+      image: javavirys/android:31
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: ./gradlew test
+
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: javavirys/android:31
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run lint
+        run: ./gradlew lint
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: lint
+          path:
+            sample/build/reports
+
+  buildDebugApks:
+    needs: [ lint, tests ]
+    runs-on: ubuntu-latest
+    container:
+      image: javavirys/android:31
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build apks
+        run: ./gradlew assembleDebug
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Apks
+          path:
+            sample/build/outputs/apk
+          retention-days: 30
