@@ -2,12 +2,14 @@
 
 This is a library that will help you get all the information from android
 
-[![](https://jitpack.io/v/LiteSoftware/SectorProgressBar.svg)](https://jitpack.io/#LiteSoftware/SectorProgressBar)
+[![](https://jitpack.io/v/LiteSoftware/AndroidInfoLib.svg)](https://jitpack.io/#LiteSoftware/AndroidInfoLib)
 
-<img src="screens/1_2.png" width="30%" /> <img src="screens/1_3.png" width="30%" />
+<img src="screens/1_1.png" width="30%" /> <img src="screens/1_2.png" width="30%" /> <img src="screens/1_3.png" width="30%" />
 
 ## How to use
+
 1. Add this in your root `build.gradle` at the end of `repositories` in `allprojects` section:
+
 ```groovy
 allprojects {
     repositories {
@@ -17,11 +19,13 @@ allprojects {
 ```
 
 2. Then add this dependency to your **module-level** `build.gradle` in `dependencies` section:
+
 ```groovy
-implementation 'com.github.LiteSoftware:SectorProgressBar:$version'
+implementation 'com.github.LiteSoftware:AndroidInfoLib:$version'
 ```
 
 3. Call any of the methods below to get information about your android
+
 ```kotlin
 DeviceInformationFactory.getGeneralInformation()
 DeviceInformationFactory.getRAMInformation(context)
