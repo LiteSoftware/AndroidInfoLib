@@ -1,5 +1,7 @@
 package com.udfsoft.androidinfo.lib.entity
 
-class USBInformation {
-
-}
+data class USBInformation(
+    val connectorType: String?,
+    val version: String?,
+    val features: String?
+)

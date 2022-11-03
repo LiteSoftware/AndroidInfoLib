@@ -1,5 +1,11 @@
 package com.udfsoft.androidinfo.lib.entity
 
-class OSInformation {
-
-}
+data class OSInformation(
+    val manufacturer: String?,
+    val version: Int,
+    val versionRelease: String?,
+    val incremental: String?,
+    val codeName: String?,
+    val linuxVersion: String?,
+    val operatingSystem: String?
+)
